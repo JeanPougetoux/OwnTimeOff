@@ -1,0 +1,28 @@
+$fa-font-path: "./../../../../node_modules/font-awesome/fonts/";
+@import './../../../../node_modules/font-awesome/scss/font-awesome.scss';
+
+// Colors
+$purple: #7a325d;
+$primary: $purple;
+$black: #202020;
+
+@import './../../../../node_modules/bulma/bulma.sass';
+
+.navbar {
+  background-color: $black;
+}
+.navbar > .container {
+  background-color: $black;
+}
+.navbar a.navbar-item:hover {
+  background-color: $black;
+}
+.navbar .title
+{
+  color: #a0a0a0;
+  font-weight: 600;
+}
+
+.counter {
+  width: 500px;
+}

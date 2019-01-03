@@ -1,4 +1,4 @@
-namespace EventStorage
+namespace Storage.Events
 
 type private InMemoryStream<'TValue> () =
   let stream = ResizeArray<'TValue>()

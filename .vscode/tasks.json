@@ -1,0 +1,62 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build all",
+            "type": "shell",
+            "command": "dotnet build",
+            "windows": {
+                "command": "dotnet build"
+            },
+            "problemMatcher":"$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Start server with watch",
+            "type": "shell",
+            "command": "dotnet watch run",
+            "windows": {
+                "command": "dotnet watch run",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/src/app/Server"
+            },
+            "problemMatcher":"$msCompile",
+            "group": "none"
+        },
+        {
+            "label": "Start client with watch",
+            "type": "shell",
+            "command": "dotnet fable webpack-dev-server -- --config src/app/Client/webpack.config.js",
+            "windows": {
+                "command": "dotnet fable webpack-dev-server -- --config src/app/Client/webpack.config.js",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/src/app/Client/"
+            },
+            "problemMatcher":"$msCompile",
+            "group": "none"
+        },
+        {
+            "label": "Run server logic tests",
+            "type": "shell",
+            "command": "dotnet run",
+            "windows": {
+                "command": "dotnet run",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/src/test/Logic.Tests"
+            },
+            "problemMatcher":"$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}

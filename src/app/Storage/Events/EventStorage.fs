@@ -1,4 +1,4 @@
-namespace EventStorage
+namespace Storage.Events
 
 type IStream<'TValue> =
   abstract member ReadAll: unit -> 'TValue seq

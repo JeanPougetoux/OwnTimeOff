@@ -1,16 +1,21 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Shared", "src\app\Shared\Shared.fsproj", "{D8586F69-0F09-4F9E-B8C9-D6BC892F61F3}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Shared", "src\app\Shared\Shared.fsproj", "{D8586F69-0F09-4F9E-B8C9-D6BC892F61F3}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Storage", "src\app\Storage\Storage.fsproj", "{B29EBCAC-427E-4608-8405-045FC50ADE18}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Storage", "src\app\Storage\Storage.fsproj", "{B29EBCAC-427E-4608-8405-045FC50ADE18}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Logic", "src\app\Logic\Logic.fsproj", "{E43259BB-76F6-4435-B345-DACDEBF323BF}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Logic", "src\app\Logic\Logic.fsproj", "{E43259BB-76F6-4435-B345-DACDEBF323BF}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Server", "src\app\Server\Server.fsproj", "{FEF3C9AD-A3B8-4594-BB94-1A4D27A0ACC1}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Server", "src\app\Server\Server.fsproj", "{FEF3C9AD-A3B8-4594-BB94-1A4D27A0ACC1}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Logic.Tests", "src\test\Logic.Tests\Logic.Tests.fsproj", "{FD40B736-32E5-4835-BB96-EF493D7F9D62}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Client", "src\app\Client\Client.fsproj", "{FE829474-5BFA-4641-BA15-15E8CDC5BEAD}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Logic.Tests", "src\test\Logic.Tests\Logic.Tests.fsproj", "{FD40B736-32E5-4835-BB96-EF493D7F9D62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{55EFAF98-1378-4AD2-A4BF-C4D4E26BDB69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +39,10 @@ Global
 		{FEF3C9AD-A3B8-4594-BB94-1A4D27A0ACC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEF3C9AD-A3B8-4594-BB94-1A4D27A0ACC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEF3C9AD-A3B8-4594-BB94-1A4D27A0ACC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE829474-5BFA-4641-BA15-15E8CDC5BEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE829474-5BFA-4641-BA15-15E8CDC5BEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE829474-5BFA-4641-BA15-15E8CDC5BEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE829474-5BFA-4641-BA15-15E8CDC5BEAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD40B736-32E5-4835-BB96-EF493D7F9D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD40B736-32E5-4835-BB96-EF493D7F9D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD40B736-32E5-4835-BB96-EF493D7F9D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,5 +50,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC86C4A0-5ED4-41BE-AD9D-077087152BC8}
 	EndGlobalSection
 EndGlobal

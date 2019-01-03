@@ -1,5 +1,6 @@
-namespace EventStorage
+namespace Storage.Events
 
+open Storage
 open System.IO
 
 type private FileStream<'TValue> (path: string) =

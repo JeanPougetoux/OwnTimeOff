@@ -20,9 +20,11 @@ module Handlers =
         if login.Password = login.UserName then
             match login.UserName with
             | "manager"   -> Some { UserName = login.UserName; User = Manager }
-            | "employee1" -> Some { UserName = login.UserName; User = Employee 1 }
-            | "employee2" -> Some { UserName = login.UserName; User = Employee 2 }
-            | "employee3" -> Some { UserName = login.UserName; User = Employee 3 }
+            | "employee1" -> Some { UserName = login.UserName; User = Employee login.UserName }
+            | "employee2" -> Some { UserName = login.UserName; User = Employee login.UserName }
+            | "employee3" -> Some { UserName = login.UserName; User = Employee login.UserName }
+            | "employee4" -> Some { UserName = login.UserName; User = Employee login.UserName }
+            | "employee5" -> Some { UserName = login.UserName; User = Employee login.UserName }
             | _ -> None
         else
             None

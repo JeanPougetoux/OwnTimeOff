@@ -5,9 +5,8 @@ open System
 // Then our commands
 type Command =
     | RequestTimeOff of TimeOffRequest
-    | ValidateRequest of UserId * Guid
-    with
-    member this.UserId =
+    | ValidateRequest of UserId * Guid with
+    member this.UserId : UserId =
         match this with
         | RequestTimeOff request -> request.UserId
         | ValidateRequest (userId, _) -> userId
@@ -15,9 +14,8 @@ type Command =
 // And our events
 type RequestEvent =
     | RequestCreated of TimeOffRequest
-    | RequestValidated of TimeOffRequest
-    with
-    member this.Request =
+    | RequestValidated of TimeOffRequest with
+    member this.Request : TimeOffRequest =
         match this with
         | RequestCreated request -> request
         | RequestValidated request -> request
@@ -54,15 +52,16 @@ module Logic =
         userRequests.Add (event.Request.RequestId, newRequestState)
 
     let overlapsWith request1 request2 =
-        false //TODO: write a function that checks if 2 requests overlap
+        request1.Start = request2.Start || request1.End = request2.End
 
     let overlapsWithAnyRequest (otherRequests: TimeOffRequest seq) request =
         false //TODO: write this function using overlapsWith
 
-    let createRequest today activeUserRequests request =
+    let createRequest activeUserRequests  request =
         if request |> overlapsWithAnyRequest activeUserRequests then
             Error "Overlapping request"
-        elif request.Start.Date <= today then
+        // This DateTime.Today must go away!
+        elif request.Start.Date <= DateTime.Today then
             Error "The request starts in the past"
         else
             Ok [RequestCreated request]
@@ -74,7 +73,7 @@ module Logic =
         | _ ->
             Error "Request cannot be validated"
 
-    let decide (today: DateTime) (userRequests: UserRequestsState) (user: User) (command: Command) =
+    let decide (userRequests: UserRequestsState) (user: User) (command: Command) =
         let relatedUserId = command.UserId
         match user with
         | Employee userId when userId <> relatedUserId ->
@@ -89,7 +88,7 @@ module Logic =
                     |> Seq.where (fun state -> state.IsActive)
                     |> Seq.map (fun state -> state.Request)
 
-                createRequest today activeUserRequests request
+                createRequest activeUserRequests request
 
             | ValidateRequest (_, requestId) ->
                 if user <> Manager then
