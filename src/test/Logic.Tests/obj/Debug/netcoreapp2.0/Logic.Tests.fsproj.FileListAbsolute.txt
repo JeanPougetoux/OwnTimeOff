@@ -28,3 +28,5 @@ C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\test\Logic.Tests\obj\Debug\n
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\test\Logic.Tests\obj\Debug\netcoreapp2.0\Logic.Tests.fsproj.CopyComplete
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\test\Logic.Tests\obj\Debug\netcoreapp2.0\Logic.Tests.dll
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\test\Logic.Tests\obj\Debug\netcoreapp2.0\Logic.Tests.pdb
+C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\test\Logic.Tests\obj\Debug\netcoreapp2.0\Logic.Tests.AssemblyInfoInputs.cache
+C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\test\Logic.Tests\obj\Debug\netcoreapp2.0\Logic.Tests.AssemblyInfo.fs

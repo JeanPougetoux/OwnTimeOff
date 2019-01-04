@@ -51,6 +51,43 @@ let overlapTests =
 
       Expect.isFalse (Logic.overlapsWith request1 request2) "The requests don't overlap"
     }
+
+    test "Requests when request 2 is in request 1 should overlap" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 10, 1); HalfDay = AM }
+        End = { Date = DateTime(2018, 10, 5); HalfDay = PM }
+      }
+
+      let request2 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 10, 2); HalfDay = AM }
+        End = { Date = DateTime(2018, 10, 2); HalfDay = PM }
+      }
+
+      Expect.isTrue(Logic.overlapsWith request1 request2) "The requests overlap"
+    }
+
+    test "Request should overlap when any other overlap" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 10, 1); HalfDay = AM }
+        End = { Date = DateTime(2018, 10, 5); HalfDay = PM }
+      }
+
+      let request2 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 10, 2); HalfDay = AM }
+        End = { Date = DateTime(2018, 10, 2); HalfDay = PM }
+      }
+
+      let mySeq = seq { yield request2 }
+      Expect.isTrue(Logic.overlapsWithAnyRequest (mySeq) request1) "The requests overlap"
+    }
   ]
 
 [<Tests>]

@@ -51,11 +51,16 @@ module Logic =
         let newRequestState = evolveRequest requestState event
         userRequests.Add (event.Request.RequestId, newRequestState)
 
+    let requestIn request1 request2 =
+        (request1.Start >= request2.Start && request1.Start <= request2.End) 
+        || (request1.End >= request2.Start && request1.End <= request2.End)
+
     let overlapsWith request1 request2 =
-        request1.Start = request2.Start || request1.End = request2.End
+        request1 |> requestIn request2
+        || request2 |> requestIn request1
 
     let overlapsWithAnyRequest (otherRequests: TimeOffRequest seq) request =
-        false //TODO: write this function using overlapsWith
+        otherRequests |> Seq.exists (overlapsWith request)
 
     let createRequest today activeUserRequests  request =
         if request |> overlapsWithAnyRequest activeUserRequests then

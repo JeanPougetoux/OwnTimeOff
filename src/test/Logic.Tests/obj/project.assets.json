@@ -3445,6 +3445,14 @@
             }
           }
         }
+      },
+      "warningProperties": {
+        "noWarn": [
+          "NU1603",
+          "NU1604",
+          "NU1605",
+          "NU1608"
+        ]
       }
     },
     "frameworks": {

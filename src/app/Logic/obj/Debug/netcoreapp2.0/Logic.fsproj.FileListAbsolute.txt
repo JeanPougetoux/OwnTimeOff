@@ -20,3 +20,5 @@ C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcorea
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.fsproj.CopyComplete
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.dll
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.pdb
+C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.AssemblyInfoInputs.cache
+C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.AssemblyInfo.fs
