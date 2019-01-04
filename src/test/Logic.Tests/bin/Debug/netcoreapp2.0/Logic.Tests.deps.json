@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "a68e27f124d0cdf19e3e4bc5c6ee419217fe2836"
+    "signature": "3b290a90c14804a2ee22190de245ffc63516a94c"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,6 +9,7 @@
       "Logic.Tests/1.0.0": {
         "dependencies": {
           "Expecto": "8.6.5",
+          "FSharp.Core": "4.5.4",
           "Logic": "1.0.0"
         },
         "runtime": {
@@ -17,7 +18,7 @@
       },
       "Argu/5.1.0": {
         "dependencies": {
-          "FSharp.Core": "4.3.2",
+          "FSharp.Core": "4.5.4",
           "System.Configuration.ConfigurationManager": "4.4.0"
         },
         "runtime": {
@@ -40,11 +41,11 @@
           }
         }
       },
-      "FSharp.Core/4.3.2": {
+      "FSharp.Core/4.5.4": {
         "runtime": {
           "lib/netstandard1.6/FSharp.Core.dll": {
-            "assemblyVersion": "4.4.3.0",
-            "fileVersion": "2018.1.25.1"
+            "assemblyVersion": "4.5.0.0",
+            "fileVersion": "2018.11.27.2"
           }
         },
         "resources": {
@@ -120,6 +121,14 @@
           "lib/netstandard1.3/Mono.Cecil.dll": {
             "assemblyVersion": "0.10.0.0",
             "fileVersion": "0.10.0.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/12.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.1.22727"
           }
         }
       },
@@ -505,6 +514,7 @@
       },
       "Logic/1.0.0": {
         "dependencies": {
+          "FSharp.Core": "4.5.4",
           "Shared": "1.0.0",
           "Storage": "1.0.0"
         },
@@ -513,11 +523,18 @@
         }
       },
       "Shared/1.0.0": {
+        "dependencies": {
+          "FSharp.Core": "4.5.4"
+        },
         "runtime": {
           "Shared.dll": {}
         }
       },
       "Storage/1.0.0": {
+        "dependencies": {
+          "FSharp.Core": "4.5.4",
+          "Newtonsoft.Json": "12.0.1"
+        },
         "runtime": {
           "Storage.dll": {}
         }
@@ -544,12 +561,12 @@
       "path": "expecto/8.6.5",
       "hashPath": "expecto.8.6.5.nupkg.sha512"
     },
-    "FSharp.Core/4.3.2": {
+    "FSharp.Core/4.5.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CR5/gOr3EXghLOih4N+l8rlM4n5V3Vniv8L8tAeft5+P2QPSpU4CHF0YoTCXUpqfKXRQpvPej70MjHpBfgXJDA==",
-      "path": "fsharp.core/4.3.2",
-      "hashPath": "fsharp.core.4.3.2.nupkg.sha512"
+      "sha512": "sha512-MXHxhqiKrTNozu1D23pXBTWZQD9hbzlwIWd+z9ywFoyVFMkeSdZzoV6d116sl33BD1iQtu/lEe5BWY/J96qZNQ==",
+      "path": "fsharp.core/4.5.4",
+      "hashPath": "fsharp.core.4.5.4.nupkg.sha512"
     },
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",
@@ -564,6 +581,13 @@
       "sha512": "sha512-hyha+PVmfqjD6Hx3pqCE4odAcd7d7Fb/CZkRfmNsLodprRKfOc2wu9EvWL1nGIXL2zTjSS2G/h2/96BWffdYkg==",
       "path": "mono.cecil/0.10.0",
       "hashPath": "mono.cecil.0.10.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jmVyoEyk0In8r+AObYQyFKVFm7uSRzE0XSHSbEtBJcZDMV6DqJoyB4FLcHwprPVhAh826so0db3DIKXVnpGoPA==",
+      "path": "newtonsoft.json/12.0.1",
+      "hashPath": "newtonsoft.json.12.0.1.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",
