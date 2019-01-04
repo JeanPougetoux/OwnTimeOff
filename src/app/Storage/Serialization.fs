@@ -1,4 +1,4 @@
-namespace Storage
+namespace EventStorage
 
 module private Serialization =
   open Newtonsoft.Json

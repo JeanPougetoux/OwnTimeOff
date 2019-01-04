@@ -1,3 +1,2 @@
-group ServerTests
-FSharp.Core
 Expecto
+FSharp.Core

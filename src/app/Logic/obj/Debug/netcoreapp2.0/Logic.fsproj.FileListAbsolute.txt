@@ -1,0 +1,11 @@
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.fsprojAssemblyReference.cache
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Shared.dll
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Storage.dll
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Shared.pdb
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Logic.deps.json
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Logic.dll
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Logic.pdb
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\bin\Debug\netcoreapp2.0\Storage.pdb
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.fsproj.CopyComplete
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.dll
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.pdb

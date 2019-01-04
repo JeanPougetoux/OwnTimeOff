@@ -1,8 +1,2 @@
 FSharp.Core
-Giraffe
 jose-jwt
-Microsoft.AspNetCore
-Microsoft.AspNetCore.Cors
-Microsoft.AspNetCore.StaticFiles
-Thoth.Json.Net
-Thoth.Json.Giraffe

@@ -1,0 +1,47 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "Logic/1.0.0": {
+        "dependencies": {
+          "Shared": "1.0.0",
+          "Storage": "1.0.0"
+        },
+        "runtime": {
+          "Logic.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "runtime": {
+          "Shared.dll": {}
+        }
+      },
+      "Storage/1.0.0": {
+        "runtime": {
+          "Storage.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Logic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Storage/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

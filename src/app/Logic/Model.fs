@@ -6,7 +6,7 @@ open System
 type Command =
     | RequestTimeOff of TimeOffRequest
     | ValidateRequest of UserId * Guid with
-    member this.UserId : UserId =
+    member this.UserId =
         match this with
         | RequestTimeOff request -> request.UserId
         | ValidateRequest (userId, _) -> userId
@@ -15,7 +15,7 @@ type Command =
 type RequestEvent =
     | RequestCreated of TimeOffRequest
     | RequestValidated of TimeOffRequest with
-    member this.Request : TimeOffRequest =
+    member this.Request =
         match this with
         | RequestCreated request -> request
         | RequestValidated request -> request
@@ -52,7 +52,7 @@ module Logic =
         userRequests.Add (event.Request.RequestId, newRequestState)
 
     let overlapsWith request1 request2 =
-        request1.Start = request2.Start || request1.End = request2.End
+        false //TODO: write a function that checks if 2 requests overlap
 
     let overlapsWithAnyRequest (otherRequests: TimeOffRequest seq) request =
         false //TODO: write this function using overlapsWith

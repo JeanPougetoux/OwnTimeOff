@@ -3,7 +3,7 @@
 open System
 
 // First, we define our domain
-type UserId = string
+type UserId = int
 
 type User =
     | Employee of UserId
@@ -23,14 +23,4 @@ type TimeOffRequest = {
     RequestId: Guid
     Start: Boundary
     End: Boundary
-}
-
-[<CLIMutable>]
-type UserVacationBalance = {
-  UserName : UserId
-  BalanceYear: int
-  CarriedOver: float
-  PortionAccruedToDate: float
-  TakenToDate: float
-  CurrentBalance: float
 }

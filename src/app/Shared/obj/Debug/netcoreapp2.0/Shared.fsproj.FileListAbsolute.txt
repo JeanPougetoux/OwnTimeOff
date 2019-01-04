@@ -1,0 +1,6 @@
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Shared\bin\Debug\netcoreapp2.0\Shared.deps.json
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Shared\bin\Debug\netcoreapp2.0\Shared.dll
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Shared\bin\Debug\netcoreapp2.0\Shared.pdb
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.dll
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.pdb
+C:\Users\jpougetoux\Documents\GitHub\TimeOffEvents\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.fsprojAssemblyReference.cache
