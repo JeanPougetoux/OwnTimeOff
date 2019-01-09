@@ -668,10 +668,12 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+      "sha512": "5BdAWDgMNwf90L0J+C/eh6kfHDa37ViL1cBL1nv5zPA4TB2cGV51YiQyvzCEy9DBE0LwwMI4+PkUpIekKyocSA==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
@@ -869,23 +871,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jpougetoux\\.nuget\\packages\\": {},
+    "C:\\Users\\spyro\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Logic\\Logic.fsproj",
+      "projectUniqueName": "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Logic\\Logic.fsproj",
       "projectName": "Logic",
-      "projectPath": "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Logic\\Logic.fsproj",
-      "packagesPath": "C:\\Users\\jpougetoux\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Logic\\obj\\",
+      "projectPath": "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Logic\\Logic.fsproj",
+      "packagesPath": "C:\\Users\\spyro\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Logic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\jpougetoux\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\spyro\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -898,11 +900,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Shared\\Shared.fsproj": {
-              "projectPath": "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Shared\\Shared.fsproj"
+            "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Shared\\Shared.fsproj": {
+              "projectPath": "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Shared\\Shared.fsproj"
             },
-            "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Storage\\Storage.fsproj": {
-              "projectPath": "C:\\Users\\jpougetoux\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Storage\\Storage.fsproj"
+            "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Storage\\Storage.fsproj": {
+              "projectPath": "C:\\Users\\spyro\\Documents\\GitHub\\OwnTimeOff\\src\\app\\Storage\\Storage.fsproj"
             }
           }
         }

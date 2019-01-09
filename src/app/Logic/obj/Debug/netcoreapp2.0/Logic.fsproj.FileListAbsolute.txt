@@ -22,3 +22,16 @@ C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcorea
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.pdb
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.AssemblyInfoInputs.cache
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.AssemblyInfo.fs
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Logic.deps.json
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Logic.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Logic.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Shared.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Storage.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Shared.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\bin\Debug\netcoreapp2.0\Storage.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.fsprojAssemblyReference.cache
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.AssemblyInfoInputs.cache
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.AssemblyInfo.fs
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Logic\obj\Debug\netcoreapp2.0\Logic.fsproj.CopyComplete

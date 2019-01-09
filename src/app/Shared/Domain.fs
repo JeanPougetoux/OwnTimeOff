@@ -19,6 +19,7 @@ type Boundary = {
 
 [<CLIMutable>]
 type TimeOffRequest = {
+    Date: DateTime
     UserId: UserId
     RequestId: Guid
     Start: Boundary

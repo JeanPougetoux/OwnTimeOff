@@ -14,8 +14,15 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Expecto" Version="8.*" />
+    <PackageReference Include="Expecto" Version="8.7.0" />
     <PackageReference Include="FSharp.Core" Version="4.5.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Argu" Version="5.2.0" />
+    <PackageReference Update="Microsoft.NETCore.Platforms" Version="2.2.0" />
+    <PackageReference Update="System.Memory" Version="4.5.2" />
+    <PackageReference Update="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
+    <PackageReference Update="System.Security.Principal.Windows" Version="4.5.1" />
   </ItemGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

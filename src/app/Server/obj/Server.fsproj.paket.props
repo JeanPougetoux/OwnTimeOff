@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+        <PaketPropsVersion>5.185.3</PaketPropsVersion>
+        <PaketPropsLoaded>true</PaketPropsLoaded>
+    </PropertyGroup>
+
+    <ItemGroup Condition="($(DesignTimeBuild) == true) AND (('$(TargetFramework)' == 'netcoreapp2.0') OR ('$(TargetFramework)' == 'netcoreapp20'))">
+        <PackageReference Include="FSharp.Core">
+            <Version>4.5.2</Version>
+        </PackageReference>
+        <PackageReference Include="Microsoft.NETCore.Platforms">
+            <Version>2.1.1</Version>
+        </PackageReference>
+        <PackageReference Include="Microsoft.NETCore.Targets">
+            <Version>2.1</Version>
+        </PackageReference>
+        <PackageReference Include="Newtonsoft.Json">
+            <Version>11.0.2</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.debian.9-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.fedora.27-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.fedora.28-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.native.System">
+            <Version>4.3.1</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.native.System.IO.Compression">
+            <Version>4.3.2</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.native.System.Net.Http">
+            <Version>4.3.1</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.opensuse.42.3-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple">
+            <Version>4.3.1</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.native.System.Security.Cryptography.Apple">
+            <Version>4.3.1</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.ubuntu.18.04-x64.runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="runtime.native.System.Security.Cryptography.OpenSsl">
+            <Version>4.3.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Buffers">
+            <Version>4.5</Version>
+        </PackageReference>
+        <PackageReference Include="System.Runtime">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Collections">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Diagnostics.Debug">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Diagnostics.Tracing">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Globalization">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Globalization.Calendars">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.IO.FileSystem.Primitives">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Reflection.Primitives">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.Extensions">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.Handles">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.Cng">
+            <Version>4.5</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.OpenSsl">
+            <Version>4.5</Version>
+        </PackageReference>
+        <PackageReference Include="System.Text.Encoding">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Threading.Tasks">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.IO">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.IO.FileSystem">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Reflection">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Resources.ResourceManager">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Linq">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.InteropServices">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.Numerics">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.Serialization.Primitives">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Threading">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Collections.Concurrent">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.IO.Compression">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.Primitives">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.Encoding">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.Algorithms">
+            <Version>4.3.1</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.Csp">
+            <Version>4.3</Version>
+        </PackageReference>
+        <PackageReference Include="System.Security.Cryptography.X509Certificates">
+            <Version>4.3.2</Version>
+        </PackageReference>
+        <PackageReference Include="jose-jwt">
+            <Version>2.4</Version>
+        </PackageReference>
+    </ItemGroup>
+</Project>

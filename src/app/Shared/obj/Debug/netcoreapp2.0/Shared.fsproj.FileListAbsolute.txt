@@ -12,3 +12,11 @@ C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcore
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.pdb
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.AssemblyInfoInputs.cache
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.AssemblyInfo.fs
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\bin\Debug\netcoreapp2.0\Shared.deps.json
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\bin\Debug\netcoreapp2.0\Shared.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\bin\Debug\netcoreapp2.0\Shared.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.fsprojAssemblyReference.cache
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.AssemblyInfoInputs.cache
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Shared\obj\Debug\netcoreapp2.0\Shared.AssemblyInfo.fs

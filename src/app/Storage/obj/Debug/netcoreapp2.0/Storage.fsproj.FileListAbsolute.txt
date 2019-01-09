@@ -14,3 +14,11 @@ C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Storage\bin\Debug\netcor
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Storage\bin\Debug\netcoreapp2.0\Storage.pdb
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.AssemblyInfoInputs.cache
 C:\Users\jpougetoux\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.AssemblyInfo.fs
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\bin\Debug\netcoreapp2.0\Storage.deps.json
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\bin\Debug\netcoreapp2.0\Storage.dll
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\bin\Debug\netcoreapp2.0\Storage.pdb
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.fsprojAssemblyReference.cache
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.AssemblyInfoInputs.cache
+C:\Users\spyro\Documents\GitHub\OwnTimeOff\src\app\Storage\obj\Debug\netcoreapp2.0\Storage.AssemblyInfo.fs
