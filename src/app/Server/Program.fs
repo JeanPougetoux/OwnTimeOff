@@ -61,6 +61,20 @@ module HttpHandlers =
                     return! (BAD_REQUEST message) next ctx
             }
 
+    let getUserBalance (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let balance : UserVacationBalance = {
+                  UserName = 1
+                  BalanceYear = 2018
+                  CarriedOver = 0.0
+                  PortionAccruedToDate = 10.0
+                  TakenToDate = 0.0
+                  CurrentBalance = 10.
+                }
+                return! json balance next ctx
+            }
+
 // ---------------------------------
 // Web app
 // ---------------------------------
@@ -92,6 +106,7 @@ let webApp (eventStore: IStore<UserId, RequestEvent>) =
                         choose [
                             POST >=> route "/request" >=> HttpHandlers.requestTimeOff handleCommand identity
                             POST >=> route "/validate-request" >=> HttpHandlers.validateRequest handleCommand identity
+                            GET >=> route "/user-balance" >=> HttpHandlers.getUserBalance handleCommand identity
                         ]
                     ))
             ])
