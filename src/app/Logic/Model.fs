@@ -7,6 +7,7 @@ type Command =
     | RequestTimeOff of TimeOffRequest
     | CancelRequest of TimeOffRequest
     | RefuseCancelationRequest of UserId * Guid
+    | AcceptCancelationRequest of UserId * Guid
     | ValidateRequest of UserId * Guid 
     | RefuseRequest of UserId * Guid with
     member this.UserId =
@@ -14,6 +15,7 @@ type Command =
         | RequestTimeOff request -> request.UserId
         | CancelRequest request -> request.UserId
         | RefuseCancelationRequest (userId, _) -> userId
+        | AcceptCancelationRequest (userId, _) -> userId
         | ValidateRequest (userId, _) -> userId
         | RefuseRequest (userId, _) -> userId
 
@@ -58,6 +60,8 @@ module Logic =
 
     type UserRequestsState = Map<Guid, RequestState>
 
+    // REQUEST METHODS
+
     let evolveRequest state event =
         match event with
         | RequestCreated request -> PendingValidation request
@@ -89,6 +93,8 @@ module Logic =
             Error "Overlapping request"
         elif request.Start.Date <= today then
             Error "The request starts in the past"
+        elif request.Start.Date <= request.Date then
+            Error "The request starts in the past"
         else
             Ok [RequestCreated request]
 
@@ -108,11 +114,19 @@ module Logic =
         | _ ->
             Error "Request cannot be refused"
       
-    let cancelRequest request today =
+    let cancelRequestByUser request today =
         if isIn today request then
             Ok [RequestAskedToCancel request]
         else
             Ok [RequestCancelled request]
+    
+    // ACCOUNT METHODS
+
+    let daysOffAdding (today : DateTime) = 
+        (float (today.Month - 1)) * 2.5
+
+    let reportDaysOffAdding =
+        0
 
     let decide (today: DateTime) (userRequests: UserRequestsState) (user: User) (command: Command) =
         let relatedUserId = command.UserId
@@ -122,6 +136,13 @@ module Logic =
         | _ ->
             match command with
             | RequestTimeOff request ->
+                let requestSameGuid =
+                    userRequests
+                    |> Map.toSeq
+                    |> Seq.map (fun (_, state) -> state.Request)
+                    |> Seq.where (fun req -> req.RequestId = request.RequestId)
+                    |> Seq.length
+
                 let activeUserRequests =
                     userRequests
                     |> Map.toSeq
@@ -129,7 +150,10 @@ module Logic =
                     |> Seq.where (fun state -> state.IsActive)
                     |> Seq.map (fun state -> state.Request)
 
-                createRequest today activeUserRequests request
+                if requestSameGuid > 0 then
+                    Error "A request has already the same guid"
+                else
+                    createRequest today activeUserRequests request
 
             | CancelRequest request ->
                 let requestState = defaultArg (userRequests.TryFind request.RequestId) NotCreated
@@ -140,7 +164,7 @@ module Logic =
                 elif relatedUserId <> request.UserId then
                     Error "The request should only be cancelled by the owner or a manager"
                 else
-                    cancelRequest request today
+                    cancelRequestByUser request today
 
             | RefuseCancelationRequest (_, requestId) ->
                 if user <> Manager then
@@ -149,6 +173,15 @@ module Logic =
                     let requestState = defaultArg (userRequests.TryFind requestId) NotCreated
                     match requestState with
                       | PendingCancelling _ -> validateRequest requestState
+                      | _ -> Error "The request should be pending cancelling"
+
+            | AcceptCancelationRequest (_, requestId) ->
+                if user <> Manager then
+                    Error "Unauthorized"
+                else
+                    let requestState = defaultArg (userRequests.TryFind requestId) NotCreated
+                    match requestState with
+                      | PendingCancelling request -> Ok [RequestCancelled request]
                       | _ -> Error "The request should be pending cancelling"
 
             | ValidateRequest (_, requestId) ->

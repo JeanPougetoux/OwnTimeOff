@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "Argu/5.2.0": {
+      "Argu/5.1.0": {
         "type": "package",
         "dependencies": {
           "FSharp.Core": "4.3.2",
@@ -253,7 +253,7 @@
           "Microsoft.NETCore.DotNetAppHost": "2.0.0"
         }
       },
-      "Microsoft.NETCore.Platforms/2.2.0": {
+      "Microsoft.NETCore.Platforms/2.1.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -673,13 +673,13 @@
           "lib/netstandard1.6/System.Linq.dll": {}
         }
       },
-      "System.Memory/4.5.2": {
+      "System.Memory/4.5.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+          "System.Runtime.CompilerServices.Unsafe": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.0/System.Memory.dll": {}
+          "ref/netstandard2.0/System.Memory.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Memory.dll": {}
@@ -744,7 +744,7 @@
           "ref/netstandard1.5/System.Runtime.dll": {}
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "System.Runtime.CompilerServices.Unsafe/4.5.1": {
         "type": "package",
         "compile": {
           "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
@@ -968,7 +968,7 @@
           "lib/netstandard2.0/System.Security.Permissions.dll": {}
         }
       },
-      "System.Security.Principal.Windows/4.5.1": {
+      "System.Security.Principal.Windows/4.5.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
@@ -1070,21 +1070,20 @@
     }
   },
   "libraries": {
-    "Argu/5.2.0": {
-      "sha512": "WyAXjJHh091VYYmzK+AOsGnzj1fg95v/yoSjyehxYirk7qH4pDfgy2oukYQQJB8bOoc8sdUQhLWuSYIl4zkvYg==",
+    "Argu/5.1.0": {
+      "sha512": "u6AUpmlBbCtRwDbKQVwMInwlK4gHYUcodVnxp8CTzygtQdUORfX44ugm6A7Ic+bGrnPwX0VRCcBQqNDKPKZehA==",
       "type": "package",
-      "path": "argu/5.2.0",
+      "path": "argu/5.1.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
-        "argu.5.2.0.nupkg.sha512",
+        "argu.5.1.0.nupkg.sha512",
         "argu.nuspec",
+        "lib/net45/Argu.XML",
         "lib/net45/Argu.dll",
         "lib/net45/Argu.pdb",
-        "lib/net45/Argu.xml",
+        "lib/netstandard2.0/Argu.XML",
         "lib/netstandard2.0/Argu.dll",
-        "lib/netstandard2.0/Argu.pdb",
-        "lib/netstandard2.0/Argu.xml"
+        "lib/netstandard2.0/Argu.pdb"
       ]
     },
     "Expecto/8.7.0": {
@@ -1482,17 +1481,17 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.Platforms/2.2.0": {
-      "sha512": "whK/5p0sLtQiDbcTphVRjmN3tmV+YMYf8vuaKU05y1iZw9KWiG/iLY5Pd3ok+vFBJ+FZnmp7NqF7o7WrAYToLg==",
+    "Microsoft.NETCore.Platforms/2.1.1": {
+      "sha512": "nVc2yjMSfYSj8thtpr04d8oZdLpkQFSvkvr5kW8P90Lv+byylF4rnLii4hbsfICeNOQXmnVvSEmjYf1Xegrv5w==",
       "type": "package",
-      "path": "microsoft.netcore.platforms/2.2.0",
+      "path": "microsoft.netcore.platforms/2.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.2.2.0.nupkg.sha512",
+        "microsoft.netcore.platforms.2.1.1.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
         "runtime.json",
         "useSharedDesignerContext.txt",
@@ -2626,14 +2625,16 @@
         "system.linq.nuspec"
       ]
     },
-    "System.Memory/4.5.2": {
-      "sha512": "Ohf9h6em5CjPaAzupGtW/TWMzX6aVfIGPh7bq5KQmfvYJr+DqvOa0cRS9ggFKGIuvKTModCQEacGC/CwE8j7cg==",
+    "System.Memory/4.5.1": {
+      "sha512": "sDJYJpGtTgx+23Ayu5euxG5mAXWdkDb4+b0rD0Cab0M1oQS9H0HXGPriKcqpXuiJDTV7fTp/d+fMDJmnr6sNvA==",
       "type": "package",
-      "path": "system.memory/4.5.2",
+      "path": "system.memory/4.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
+        "System.Memory.4.5.1.nupkg.sha512",
+        "System.Memory.nuspec",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netcoreapp2.1/_._",
         "lib/netstandard1.1/System.Memory.dll",
@@ -2641,8 +2642,10 @@
         "lib/netstandard2.0/System.Memory.dll",
         "lib/netstandard2.0/System.Memory.xml",
         "ref/netcoreapp2.1/_._",
-        "system.memory.4.5.2.nupkg.sha512",
-        "system.memory.nuspec",
+        "ref/netstandard1.1/System.Memory.dll",
+        "ref/netstandard1.1/System.Memory.xml",
+        "ref/netstandard2.0/System.Memory.dll",
+        "ref/netstandard2.0/System.Memory.xml",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -2951,14 +2954,16 @@
         "system.runtime.nuspec"
       ]
     },
-    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
-      "sha512": "hMkdWxksypQlFXB7JamQegDscxEAQO4FHd/lw/zlSZU9dZgAij65xjCrXer183wvoNAzJic5zzjj2oc9/dloWg==",
+    "System.Runtime.CompilerServices.Unsafe/4.5.1": {
+      "sha512": "Zh8t8oqolRaFa9vmOZfdQm/qKejdqz0J9kr7o2Fu0vPeoH3BL1EOXipKWwkWtLT1JPzjByrF19fGuFlNbmPpiw==",
       "type": "package",
-      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
+        "System.Runtime.CompilerServices.Unsafe.4.5.1.nupkg.sha512",
+        "System.Runtime.CompilerServices.Unsafe.nuspec",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
@@ -2970,8 +2975,6 @@
         "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
-        "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -3485,10 +3488,10 @@
         "version.txt"
       ]
     },
-    "System.Security.Principal.Windows/4.5.1": {
-      "sha512": "fW0P2RSkfliNaoC9EyEhRsaa9kjsaeiDrrsckSfEsip09l9zNsdnHKeddmQVZdkJDbOMg7plQSDDfGLL4Btmnw==",
+    "System.Security.Principal.Windows/4.5.0": {
+      "sha512": "capb+lfupSJI5lGJy0dTjLwkXcYiBRU5nf7PKtOpLShLrGiguO97q1R651d1XMbOv5c80cB1Oy+32KgBgizAwA==",
       "type": "package",
-      "path": "system.security.principal.windows/4.5.1",
+      "path": "system.security.principal.windows/4.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3522,7 +3525,7 @@
         "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
         "runtimes/win/lib/netstandard1.3/System.Security.Principal.Windows.dll",
         "runtimes/win/lib/uap10.0.16299/_._",
-        "system.security.principal.windows.4.5.1.nupkg.sha512",
+        "system.security.principal.windows.4.5.0.nupkg.sha512",
         "system.security.principal.windows.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -3750,12 +3753,12 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "Argu >= 5.2.0",
+      "Argu >= 5.1.0",
       "Expecto >= 8.7.0",
       "FSharp.Core >= 4.5.4",
       "Logic >= 1.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
-      "Microsoft.NETCore.Platforms >= 2.2.0",
+      "Microsoft.NETCore.Platforms >= 2.1.1",
       "Microsoft.NETCore.Targets >= 2.1.0",
       "Mono.Cecil >= 0.10.1",
       "System.Collections >= 4.3.0",
@@ -3770,13 +3773,13 @@
       "System.IO.FileSystem >= 4.3.0",
       "System.IO.FileSystem.Primitives >= 4.3.0",
       "System.Linq >= 4.3.0",
-      "System.Memory >= 4.5.2",
+      "System.Memory >= 4.5.1",
       "System.Reflection >= 4.3.0",
       "System.Reflection.Metadata >= 1.6.0",
       "System.Reflection.Primitives >= 4.3.0",
       "System.Resources.ResourceManager >= 4.3.0",
       "System.Runtime >= 4.3.0",
-      "System.Runtime.CompilerServices.Unsafe >= 4.5.2",
+      "System.Runtime.CompilerServices.Unsafe >= 4.5.1",
       "System.Runtime.Extensions >= 4.3.0",
       "System.Runtime.Handles >= 4.3.0",
       "System.Runtime.InteropServices >= 4.3.0",
@@ -3788,7 +3791,7 @@
       "System.Security.Cryptography.Primitives >= 4.3.0",
       "System.Security.Cryptography.ProtectedData >= 4.5.0",
       "System.Security.Permissions >= 4.5.0",
-      "System.Security.Principal.Windows >= 4.5.1",
+      "System.Security.Principal.Windows >= 4.5.0",
       "System.Text.Encoding >= 4.3.0",
       "System.Threading >= 4.3.0",
       "System.Threading.Tasks >= 4.3.0",
@@ -3847,6 +3850,14 @@
             }
           }
         }
+      },
+      "warningProperties": {
+        "noWarn": [
+          "NU1603",
+          "NU1604",
+          "NU1605",
+          "NU1608"
+        ]
       }
     },
     "frameworks": {
@@ -3854,7 +3865,7 @@
         "dependencies": {
           "Argu": {
             "target": "Package",
-            "version": "[5.2.0, )"
+            "version": "[5.1.0, )"
           },
           "Expecto": {
             "target": "Package",
@@ -3871,7 +3882,7 @@
           },
           "Microsoft.NETCore.Platforms": {
             "target": "Package",
-            "version": "[2.2.0, )"
+            "version": "[2.1.1, )"
           },
           "Microsoft.NETCore.Targets": {
             "target": "Package",
@@ -3931,7 +3942,7 @@
           },
           "System.Memory": {
             "target": "Package",
-            "version": "[4.5.2, )"
+            "version": "[4.5.1, )"
           },
           "System.Reflection": {
             "target": "Package",
@@ -3955,7 +3966,7 @@
           },
           "System.Runtime.CompilerServices.Unsafe": {
             "target": "Package",
-            "version": "[4.5.2, )"
+            "version": "[4.5.1, )"
           },
           "System.Runtime.Extensions": {
             "target": "Package",
@@ -4003,7 +4014,7 @@
           },
           "System.Security.Principal.Windows": {
             "target": "Package",
-            "version": "[4.5.1, )"
+            "version": "[4.5.0, )"
           },
           "System.Text.Encoding": {
             "target": "Package",
