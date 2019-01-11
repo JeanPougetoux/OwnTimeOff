@@ -19,6 +19,8 @@ let Then expected message (events: RequestEvent list, user: User, today: DateTim
     Expect.equal result expected message
 
 open System
+open TimeOff
+open TimeOff
 
 [<Tests>]
 let overlapTests = 
@@ -107,6 +109,97 @@ let accountTests =
     test "Calculate daysoff in november should result in 2.5 daysoff" {
       Expect.equal (Logic.daysOffAdding(DateTime(2018, 11, 11))) 25.0 "The number of daysoff does not match"
     }
+
+    test "A request should have 106 days" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 09, 07); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 21); HalfDay = PM }
+        Date = DateTime.Now
+      }
+      Expect.equal (Logic.calculateRequestInDays request1) 106.0 "The request don't go for 106 days"
+    }
+
+    test "A request should have 105.5 days because AM" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 09, 07); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 21); HalfDay = AM }
+        Date = DateTime.Now
+      }
+      Expect.equal (Logic.calculateRequestInDays request1) 105.5 "The request don't go for 105.5 days"
+    }
+
+    test "A request should have 105.5 days because PM" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 09, 07); HalfDay = PM }
+        End = { Date = DateTime(2018, 12, 21); HalfDay = PM }
+        Date = DateTime.Now
+      }
+      Expect.equal (Logic.calculateRequestInDays request1) 105.5 "The request don't go for 105.5 days"
+    }
+
+    test "Multiple active requests testing - 124 days" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 09, 07); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 21); HalfDay = PM }
+        Date = DateTime.Now
+      } // 106
+      let request2 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 12, 21); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 26); HalfDay = PM }
+        Date = DateTime.Now
+      } // 6
+      let request3 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 08, 15); HalfDay = AM }
+        End = { Date = DateTime(2018, 08, 31); HalfDay = PM }
+        Date = DateTime.Now
+      } // 17
+      let request4 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2018, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // inactive
+      let request5 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2017, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2017, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // in 2017
+      let request6 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2019, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2019, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // future
+      let ev request =
+        Logic.evolveRequest null (RequestValidated request)
+
+      let inactev request =
+        Logic.evolveRequest null (RequestCancelled request)
+
+      let map = Map.empty.Add(request1.RequestId, ev request1).Add(request2.RequestId, ev request2).Add(request3.RequestId, ev request3).Add(request4.RequestId, inactev request4).Add(request5.RequestId, ev request5).Add(request6.RequestId, ev request6)
+      let numbDays = Logic.takenDaysOff (DateTime(2018, 12, 31)) map
+
+      Expect.equal (Logic.calculateRequestInDays request1) 106.0 "The request don't go for 106 days"
+      Expect.equal (Logic.calculateRequestInDays request2) 6.0 "The request don't go for 6 days"
+      Expect.equal (Logic.calculateRequestInDays request3) 17.0 "The request don't go for 17 days"
+      Expect.equal numbDays 129.0 "The requests don't go for 124 days"
+    }
   ]
 
 [<Tests>]
@@ -126,6 +219,22 @@ let creationTests =
       |> AndDateIs (2018, 12, 3)
       |> When (RequestTimeOff request)
       |> Then (Ok [RequestCreated request]) "The request should have been created"
+    }
+
+    test "A request with end before start should be rejected" {
+      let request = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 12, 29); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 28); HalfDay = PM }
+        Date = DateTime(2018, 12, 3)
+      }
+
+      Given [ ]
+      |> ConnectedAs (Employee 1)
+      |> AndDateIs (2018, 12, 3)
+      |> When (RequestTimeOff request)
+      |> Then (Error "The request end is before the start") "The request should not have been created"
     }
 
     test "A request in the past cannot be created - version system date" {

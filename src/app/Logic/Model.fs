@@ -46,8 +46,8 @@ module Logic =
         member this.Request =
             match this with
             | NotCreated -> invalidOp "Not created"
-            | Cancelled request -> request
-            | PendingCancelling request -> request
+            | Cancelled request
+            | PendingCancelling request
             | PendingValidation request
             | Validated request -> request
         member this.IsActive =
@@ -120,6 +120,12 @@ module Logic =
         else
             Ok [RequestCancelled request]
     
+    // DAYS DIFFERENCES CALCULATION
+
+    let difference (date1 : DateTime) (date2 : DateTime) =
+        let span = DateTime(date2.Year, date2.Month, date2.Day, 23, 59, 59) - DateTime(date1.Year, date1.Month, date1.Day, 0, 0, 0)
+        span.Add(TimeSpan(0, 0, 1)).TotalDays
+
     // ACCOUNT METHODS
 
     let daysOffAdding (today : DateTime) = 
@@ -127,6 +133,30 @@ module Logic =
 
     let reportDaysOffAdding =
         0
+    
+    let calculateRequestInDays request =
+        let start = request.Start.Date
+        let endof = request.End.Date
+        let startSub = if request.Start.HalfDay = PM then 0.5 else 0.0
+        let endSub = if request.End.HalfDay = AM then 0.5 else 0.0
+        let days = difference start endof
+        
+        days - startSub - endSub
+
+
+    let takenDaysOff (today : DateTime) (userRequests : UserRequestsState) =
+        let activeAndTakenUserRequests =
+            userRequests
+            |> Map.toSeq
+            |> Seq.map (fun (_, state) -> state)
+            |> Seq.where (fun state -> state.IsActive)
+            |> Seq.where (fun state -> state.Request.End.Date < today.Date)
+            |> Seq.where (fun state -> state.Request.Start.Date.Year = today.Year)
+            |> Seq.map (fun state -> calculateRequestInDays state.Request)
+            |> Seq.sum
+
+        activeAndTakenUserRequests
+         
 
     let decide (today: DateTime) (userRequests: UserRequestsState) (user: User) (command: Command) =
         let relatedUserId = command.UserId
@@ -152,6 +182,8 @@ module Logic =
 
                 if requestSameGuid > 0 then
                     Error "A request has already the same guid"
+                elif request.End.Date < request.Start.Date then
+                    Error "The request end is before the start"
                 else
                     createRequest today activeUserRequests request
 
