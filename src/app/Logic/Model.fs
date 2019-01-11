@@ -176,6 +176,7 @@ module Logic =
         | _ ->
             match command with
             | RequestTimeOff request ->
+                let solde = daysOffSold today userRequests
                 let requestSameGuid =
                     userRequests
                     |> Map.toSeq
@@ -194,6 +195,8 @@ module Logic =
                     Error "A request has already the same guid"
                 elif request.End.Date < request.Start.Date then
                     Error "The request end is before the start"
+                elif solde < calculateRequestInDays request then
+                    Error "You have not enough days to proceed the request"
                 else
                     createRequest today activeUserRequests request
 

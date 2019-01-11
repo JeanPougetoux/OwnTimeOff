@@ -440,6 +440,22 @@ let creationTests =
       |> When (RequestTimeOff request2)
       |> Then (Error "A request has already the same guid") "The request should not have been created"
     }
+
+    test "Request in january take too much days that the user do not have" {
+      let request1 = {
+        UserId = 1
+        RequestId = new Guid("4b8d6dea-3eab-4f1a-97c2-879e479f1555")
+        Start = { Date = DateTime(2019, 02, 25); HalfDay = AM }
+        End = { Date = DateTime(2019, 02, 28); HalfDay = PM } 
+        Date = DateTime.Now
+        }
+
+      Given [ ]
+      |> ConnectedAs (Employee 1)
+      |> AndDateIs (2019, 01, 11)
+      |> When (RequestTimeOff request1)
+      |> Then (Error "You have not enough days to proceed the request") "The request should not have been created"
+    }
   ]
 
 [<Tests>]
