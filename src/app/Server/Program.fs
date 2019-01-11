@@ -50,9 +50,66 @@ module HttpHandlers =
     let validateRequest (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let userAndRequestId = ctx.BindQueryString<UserAndRequestId>()
+                let! userAndRequestId = ctx.BindJsonAsync<UserAndRequestId>()
                 let user = getUserFromIdentity identity
                 let command = ValidateRequest (userAndRequestId.UserId, userAndRequestId.RequestId)
+                let result = handleCommand user command
+                match result with
+                | Ok [RequestValidated timeOffRequest] -> return! json timeOffRequest next ctx
+                | Ok _ -> return! Successful.NO_CONTENT next ctx
+                | Error message ->
+                    return! (BAD_REQUEST message) next ctx
+            }
+
+    let refuseRequest (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! userAndRequestId = ctx.BindJsonAsync<UserAndRequestId>()
+                let user = getUserFromIdentity identity
+                let command = RefuseRequest (userAndRequestId.UserId, userAndRequestId.RequestId)
+                let result = handleCommand user command
+                match result with
+                | Ok [RequestRefused timeOffRequest] -> return! json timeOffRequest next ctx
+                | Ok _ -> return! Successful.NO_CONTENT next ctx
+                | Error message ->
+                    return! (BAD_REQUEST message) next ctx
+            }
+
+    let cancelRequest (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! userAndRequestId = ctx.BindJsonAsync<UserAndRequestId>()
+                let user = getUserFromIdentity identity
+                let command = CancelRequest (userAndRequestId.UserId, userAndRequestId.RequestId)
+                let result = handleCommand user command
+                match result with
+                | Ok [RequestCancelled timeOffRequest] -> return! json timeOffRequest next ctx
+                | Ok [RequestAskedToCancel timeOffRequest] -> return! json timeOffRequest next ctx
+                | Ok _ -> return! Successful.NO_CONTENT next ctx
+                | Error message ->
+                    return! (BAD_REQUEST message) next ctx
+            }
+
+    let acceptCancel (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! userAndRequestId = ctx.BindJsonAsync<UserAndRequestId>()
+                let user = getUserFromIdentity identity
+                let command = AcceptCancelationRequest (userAndRequestId.UserId, userAndRequestId.RequestId)
+                let result = handleCommand user command
+                match result with
+                | Ok [RequestCancelled timeOffRequest] -> return! json timeOffRequest next ctx
+                | Ok _ -> return! Successful.NO_CONTENT next ctx
+                | Error message ->
+                    return! (BAD_REQUEST message) next ctx
+            }
+
+    let refuseCancel (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! userAndRequestId = ctx.BindJsonAsync<UserAndRequestId>()
+                let user = getUserFromIdentity identity
+                let command = RefuseCancelationRequest (userAndRequestId.UserId, userAndRequestId.RequestId)
                 let result = handleCommand user command
                 match result with
                 | Ok [RequestValidated timeOffRequest] -> return! json timeOffRequest next ctx
@@ -80,6 +137,17 @@ module HttpHandlers =
                     CurrentBalance = Logic.daysOffSold today state
                 }
                 return! json balance next ctx
+            }
+      
+    let getUserRequests (identity: ServerTypes.Identity) (eventStore: IStore<UserId, RequestEvent>) =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            let userId = identity.UserId
+
+            let eventStream = eventStore.GetStream(userId)
+            let state = eventStream.ReadAll() |> Seq.fold Logic.evolveUserRequests Map.empty
+
+            task {
+                return! json state next ctx
             }
 
 // ---------------------------------
@@ -113,7 +181,12 @@ let webApp (eventStore: IStore<UserId, RequestEvent>) =
                         choose [
                             POST >=> route "/request" >=> HttpHandlers.requestTimeOff handleCommand identity
                             POST >=> route "/validate-request" >=> HttpHandlers.validateRequest handleCommand identity
+                            POST >=> route "/refuse-request" >=> HttpHandlers.refuseRequest handleCommand identity
+                            POST >=> route "/cancel-request" >=> HttpHandlers.cancelRequest handleCommand identity
+                            POST >=> route "/accept-cancel" >=> HttpHandlers.acceptCancel handleCommand identity
+                            POST >=> route "/refuse-cancel" >=> HttpHandlers.refuseCancel handleCommand identity
                             GET >=> route "/user-balance" >=> HttpHandlers.getUserBalance identity eventStore
+                            GET >=> route "/user-requests" >=> HttpHandlers.getUserRequests identity eventStore
                         ]
                     ))
             ])

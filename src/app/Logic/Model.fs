@@ -5,7 +5,7 @@ open System
 // Then our commands
 type Command =
     | RequestTimeOff of TimeOffRequest
-    | CancelRequest of TimeOffRequest
+    | CancelRequest of UserId * Guid
     | RefuseCancelationRequest of UserId * Guid
     | AcceptCancelationRequest of UserId * Guid
     | ValidateRequest of UserId * Guid 
@@ -13,7 +13,7 @@ type Command =
     member this.UserId =
         match this with
         | RequestTimeOff request -> request.UserId
-        | CancelRequest request -> request.UserId
+        | CancelRequest (userId, _) -> userId
         | RefuseCancelationRequest (userId, _) -> userId
         | AcceptCancelationRequest (userId, _) -> userId
         | ValidateRequest (userId, _) -> userId
@@ -25,13 +25,15 @@ type RequestEvent =
     | RequestCreated of TimeOffRequest
     | RequestCancelled of TimeOffRequest
     | RequestAskedToCancel of TimeOffRequest
-    | RequestValidated of TimeOffRequest with
+    | RequestValidated of TimeOffRequest
+    | RequestRefused of TimeOffRequest with
     member this.Request =
         match this with
         | RequestCreated request -> request
         | RequestCancelled request -> request
         | RequestAskedToCancel request -> request
         | RequestValidated request -> request
+        | RequestRefused request -> request
 
 // We then define the state of the system,
 // and our 2 main functions `decide` and `evolve`
@@ -42,14 +44,16 @@ module Logic =
         | Cancelled of TimeOffRequest
         | PendingCancelling of TimeOffRequest
         | PendingValidation of TimeOffRequest
-        | Validated of TimeOffRequest with
+        | Validated of TimeOffRequest
+        | Refused of TimeOffRequest with
         member this.Request =
             match this with
             | NotCreated -> invalidOp "Not created"
             | Cancelled request
-            | PendingCancelling request
-            | PendingValidation request
+            | PendingCancelling request -> request
+            | PendingValidation request -> request
             | Validated request -> request
+            | Refused request -> request
         member this.IsActive =
             match this with
             | NotCreated -> false
@@ -57,6 +61,7 @@ module Logic =
             | PendingCancelling _ -> true
             | PendingValidation _ -> true
             | Validated _ -> true
+            | Refused _ -> false
 
     type UserRequestsState = Map<Guid, RequestState>
 
@@ -68,6 +73,7 @@ module Logic =
         | RequestCancelled request -> Cancelled request
         | RequestAskedToCancel request -> PendingCancelling request
         | RequestValidated request -> Validated request
+        | RequestRefused request -> Refused request
 
     let evolveUserRequests (userRequests: UserRequestsState) (event: RequestEvent) =
         let requestState = defaultArg (Map.tryFind event.Request.RequestId userRequests) NotCreated
@@ -110,12 +116,12 @@ module Logic =
     let refuseRequest requestState =
         match requestState with
         | PendingValidation request ->
-            Ok [RequestCancelled request]
+            Ok [RequestRefused request]
         | _ ->
             Error "Request cannot be refused"
       
-    let cancelRequestByUser request today =
-        if isIn today request then
+    let cancelRequestByUser request (today : DateTime) =
+        if today >= request.Start.Date then
             Ok [RequestAskedToCancel request]
         else
             Ok [RequestCancelled request]
@@ -132,7 +138,7 @@ module Logic =
         (float (today.Month - 1)) * 2.5
 
     let reportDaysOffAdding =
-        0.0
+        20.0
     
     let calculateRequestInDays request =
         let start = request.Start.Date
@@ -198,18 +204,26 @@ module Logic =
                 elif solde < calculateRequestInDays request then
                     Error "You have not enough days to proceed the request"
                 else
-                    createRequest today activeUserRequests request
+                    let newRequest : TimeOffRequest = {
+                        Date = today
+                        UserId = request.UserId
+                        RequestId = request.RequestId
+                        Start = request.Start
+                        End = request.End
+                    }
+                    createRequest today activeUserRequests newRequest
 
-            | CancelRequest request ->
-                let requestState = defaultArg (userRequests.TryFind request.RequestId) NotCreated
+            | CancelRequest (_, requestId) ->
+                let requestState = defaultArg (userRequests.TryFind requestId) NotCreated
                 if not requestState.IsActive then
                     Error "The request is not active"
                 elif user = Manager then
-                    Ok [RequestCancelled request]
-                elif relatedUserId <> request.UserId then
+                    Ok [RequestCancelled requestState.Request]
+                elif relatedUserId <> requestState.Request.UserId then
                     Error "The request should only be cancelled by the owner or a manager"
                 else
-                    cancelRequestByUser request today
+                    cancelRequestByUser requestState.Request today
+
 
             | RefuseCancelationRequest (_, requestId) ->
                 if user <> Manager then

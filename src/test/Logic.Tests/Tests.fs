@@ -260,6 +260,7 @@ let accountTests =
     }
 
     test "Multiple requests testing - 129 days" {
+      let reported = Logic.reportDaysOffAdding
       let request1 = {
         UserId = 1
         RequestId = Guid.NewGuid()
@@ -314,7 +315,7 @@ let accountTests =
       Expect.equal (Logic.calculateRequestInDays request1) 5.0 "The request don't go for 5 days"
       Expect.equal (Logic.calculateRequestInDays request2) 6.0 "The request don't go for 6 days"
       Expect.equal (Logic.calculateRequestInDays request3) 5.0 "The request don't go for 5 days"
-      Expect.equal numbDays 4.0 "The total at end is not 20 - 16 = 4"
+      Expect.equal (numbDays - reported) 4.0 "The total at end is not 20 - 16 = 4"
     }
   ]
 
@@ -445,8 +446,8 @@ let creationTests =
       let request1 = {
         UserId = 1
         RequestId = new Guid("4b8d6dea-3eab-4f1a-97c2-879e479f1555")
-        Start = { Date = DateTime(2019, 02, 25); HalfDay = AM }
-        End = { Date = DateTime(2019, 02, 28); HalfDay = PM } 
+        Start = { Date = DateTime(2019, 02, 01); HalfDay = AM }
+        End = { Date = DateTime(2019, 02, 25); HalfDay = PM } 
         Date = DateTime.Now
         }
 
@@ -574,7 +575,7 @@ let unvalidationTests =
       |> ConnectedAs Manager
       |> AndDateIs (2018, 12, 3)
       |> When (RefuseRequest (1, request.RequestId))
-      |> Then (Ok [RequestCancelled request]) "The request should have been cancelled"
+      |> Then (Ok [RequestRefused request]) "The request should have been cancelled"
     }
 
     test "A cancelled request can't be refused" {
@@ -673,7 +674,7 @@ let cancellingTests =
       Given [ RequestCreated request; RequestCancelled request ]
       |> ConnectedAs (Employee 1)
       |> AndDateIs (2018, 12, 4)
-      |> When (CancelRequest request)
+      |> When (CancelRequest (request.UserId, request.RequestId))
       |> Then (Error "The request is not active") "The cancel of the request should have been refused"
     }
 
@@ -689,7 +690,7 @@ let cancellingTests =
       Given [ RequestCreated request; RequestCancelled request ]
       |> ConnectedAs (Manager)
       |> AndDateIs (2018, 12, 4)
-      |> When (CancelRequest request)
+      |> When (CancelRequest (request.UserId, request.RequestId))
       |> Then (Error "The request is not active") "The cancel of the request should have been refused"
     }
 
@@ -705,7 +706,7 @@ let cancellingTests =
       Given [ RequestCreated request ]
       |> ConnectedAs (Employee 1)
       |> AndDateIs (2018, 12, 4)
-      |> When (CancelRequest request)
+      |> When (CancelRequest (request.UserId, request.RequestId))
       |> Then (Ok [RequestCancelled request]) "The request should have been cancelled"
     }
 
@@ -721,7 +722,7 @@ let cancellingTests =
       Given [ RequestCreated request ]
       |> ConnectedAs (Employee 1)
       |> AndDateIs (2018, 12, 29)
-      |> When (CancelRequest request)
+      |> When (CancelRequest (request.UserId, request.RequestId))
       |> Then (Ok [RequestAskedToCancel request]) "The request has been asked to cancel"
     }
 
@@ -737,7 +738,7 @@ let cancellingTests =
       Given [ RequestCreated request ]
       |> ConnectedAs (Manager)
       |> AndDateIs (2018, 12, 4)
-      |> When (CancelRequest request)
+      |> When (CancelRequest (request.UserId, request.RequestId))
       |> Then (Ok [RequestCancelled request]) "The request should have been cancelled"
     }
   ]
