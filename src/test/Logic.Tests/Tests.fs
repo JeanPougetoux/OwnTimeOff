@@ -143,7 +143,7 @@ let accountTests =
       Expect.equal (Logic.calculateRequestInDays request1) 105.5 "The request don't go for 105.5 days"
     }
 
-    test "Multiple active requests testing - 124 days" {
+    test "Multiple active back requests testing - 129 days" {
       let request1 = {
         UserId = 1
         RequestId = Guid.NewGuid()
@@ -198,7 +198,123 @@ let accountTests =
       Expect.equal (Logic.calculateRequestInDays request1) 106.0 "The request don't go for 106 days"
       Expect.equal (Logic.calculateRequestInDays request2) 6.0 "The request don't go for 6 days"
       Expect.equal (Logic.calculateRequestInDays request3) 17.0 "The request don't go for 17 days"
-      Expect.equal numbDays 129.0 "The requests don't go for 124 days"
+      Expect.equal numbDays 129.0 "The requests don't go for 129 days"
+    }
+
+    test "Multiple active future requests testing - 129 days" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 09, 07); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 21); HalfDay = PM }
+        Date = DateTime.Now
+      } // 106
+      let request2 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 12, 21); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 26); HalfDay = PM }
+        Date = DateTime.Now
+      } // 6
+      let request3 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 08, 15); HalfDay = AM }
+        End = { Date = DateTime(2018, 08, 31); HalfDay = PM }
+        Date = DateTime.Now
+      } // 17
+      let request4 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2018, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // inactive
+      let request5 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2019, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2019, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // in 2019
+      let request6 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 01, 3); HalfDay = AM }
+        End = { Date = DateTime(2018, 01, 7); HalfDay = PM }
+        Date = DateTime.Now
+      } // past
+      let ev request =
+        Logic.evolveRequest null (RequestValidated request)
+
+      let inactev request =
+        Logic.evolveRequest null (RequestCancelled request)
+
+      let map = Map.empty.Add(request1.RequestId, ev request1).Add(request2.RequestId, ev request2).Add(request3.RequestId, ev request3).Add(request4.RequestId, inactev request4).Add(request5.RequestId, ev request5).Add(request6.RequestId, ev request6)
+      let numbDays = Logic.toComeDaysOff (DateTime(2018, 03, 03)) map
+
+      Expect.equal (Logic.calculateRequestInDays request1) 106.0 "The request don't go for 106 days"
+      Expect.equal (Logic.calculateRequestInDays request2) 6.0 "The request don't go for 6 days"
+      Expect.equal (Logic.calculateRequestInDays request3) 17.0 "The request don't go for 17 days"
+      Expect.equal numbDays 129.0 "The requests don't go for 129 days"
+    }
+
+    test "Multiple requests testing - 129 days" {
+      let request1 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 09, 07); HalfDay = AM }
+        End = { Date = DateTime(2018, 09, 11); HalfDay = PM }
+        Date = DateTime.Now
+      } // 5
+      let request2 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 12, 21); HalfDay = AM }
+        End = { Date = DateTime(2018, 12, 26); HalfDay = PM }
+        Date = DateTime.Now
+      } // 6
+      let request3 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 08, 15); HalfDay = AM }
+        End = { Date = DateTime(2018, 08, 19); HalfDay = PM }
+        Date = DateTime.Now
+      } // 5
+      let request4 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2018, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2018, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // inactive
+      let request5 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2017, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2017, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // in 2017
+      let request6 = {
+        UserId = 1
+        RequestId = Guid.NewGuid()
+        Start = { Date = DateTime(2019, 08, 3); HalfDay = AM }
+        End = { Date = DateTime(2019, 08, 4); HalfDay = PM }
+        Date = DateTime.Now
+      } // in 2019
+      let ev request =
+        Logic.evolveRequest null (RequestValidated request)
+
+      let inactev request =
+        Logic.evolveRequest null (RequestCancelled request)
+
+      let map = Map.empty.Add(request1.RequestId, ev request1).Add(request2.RequestId, ev request2).Add(request3.RequestId, ev request3).Add(request4.RequestId, inactev request4).Add(request5.RequestId, ev request5).Add(request6.RequestId, ev request6)
+      let numbDays = Logic.daysOffSold (DateTime(2018, 09, 01)) map
+
+      Expect.equal (Logic.calculateRequestInDays request1) 5.0 "The request don't go for 5 days"
+      Expect.equal (Logic.calculateRequestInDays request2) 6.0 "The request don't go for 6 days"
+      Expect.equal (Logic.calculateRequestInDays request3) 5.0 "The request don't go for 5 days"
+      Expect.equal numbDays 4.0 "The total at end is not 20 - 16 = 4"
     }
   ]
 

@@ -132,7 +132,7 @@ module Logic =
         (float (today.Month - 1)) * 2.5
 
     let reportDaysOffAdding =
-        0
+        0.0
     
     let calculateRequestInDays request =
         let start = request.Start.Date
@@ -145,17 +145,27 @@ module Logic =
 
 
     let takenDaysOff (today : DateTime) (userRequests : UserRequestsState) =
-        let activeAndTakenUserRequests =
-            userRequests
-            |> Map.toSeq
-            |> Seq.map (fun (_, state) -> state)
-            |> Seq.where (fun state -> state.IsActive)
-            |> Seq.where (fun state -> state.Request.End.Date < today.Date)
-            |> Seq.where (fun state -> state.Request.Start.Date.Year = today.Year)
-            |> Seq.map (fun state -> calculateRequestInDays state.Request)
-            |> Seq.sum
+        userRequests
+        |> Map.toSeq
+        |> Seq.map (fun (_, state) -> state)
+        |> Seq.where (fun state -> state.IsActive)
+        |> Seq.where (fun state -> state.Request.Start.Date <= today.Date)
+        |> Seq.where (fun state -> state.Request.Start.Date.Year = today.Year)
+        |> Seq.map (fun state -> calculateRequestInDays state.Request)
+        |> Seq.sum
 
-        activeAndTakenUserRequests
+    let toComeDaysOff (today : DateTime) (userRequests : UserRequestsState) =
+        userRequests
+        |> Map.toSeq
+        |> Seq.map (fun (_, state) -> state)
+        |> Seq.where (fun state -> state.IsActive)
+        |> Seq.where (fun state -> state.Request.Start.Date > today.Date)
+        |> Seq.where (fun state -> state.Request.Start.Date.Year = today.Year)
+        |> Seq.map (fun state -> calculateRequestInDays state.Request)
+        |> Seq.sum
+
+    let daysOffSold (today : DateTime) (userRequests : UserRequestsState) = 
+        (daysOffAdding today) + reportDaysOffAdding - (takenDaysOff today userRequests) - (toComeDaysOff today userRequests)
          
 
     let decide (today: DateTime) (userRequests: UserRequestsState) (user: User) (command: Command) =

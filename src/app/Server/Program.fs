@@ -61,16 +61,23 @@ module HttpHandlers =
                     return! (BAD_REQUEST message) next ctx
             }
 
-    let getUserBalance (handleCommand: User -> Command -> Result<RequestEvent list, string>) (identity: ServerTypes.Identity) =
+    let getUserBalance (identity: ServerTypes.Identity) (eventStore: IStore<UserId, RequestEvent>) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
+            let userId = identity.UserId
+
+            let eventStream = eventStore.GetStream(userId)
+            let state = eventStream.ReadAll() |> Seq.fold Logic.evolveUserRequests Map.empty
+            let today = DateTime.Now
+
             task {
                 let balance : UserVacationBalance = {
-                  UserName = 1
-                  BalanceYear = 2018
-                  CarriedOver = 0.0
-                  PortionAccruedToDate = 10.0
-                  TakenToDate = 0.0
-                  CurrentBalance = 10.
+                    UserName = identity.UserId
+                    BalanceYear = today.Year
+                    PortionAccruedToDate = Logic.daysOffAdding today
+                    CarriedOver = Logic.reportDaysOffAdding
+                    TakenToDate = Logic.takenDaysOff today state
+                    Planned = Logic.toComeDaysOff today state
+                    CurrentBalance = Logic.daysOffSold today state
                 }
                 return! json balance next ctx
             }
@@ -106,7 +113,7 @@ let webApp (eventStore: IStore<UserId, RequestEvent>) =
                         choose [
                             POST >=> route "/request" >=> HttpHandlers.requestTimeOff handleCommand identity
                             POST >=> route "/validate-request" >=> HttpHandlers.validateRequest handleCommand identity
-                            GET >=> route "/user-balance" >=> HttpHandlers.getUserBalance handleCommand identity
+                            GET >=> route "/user-balance" >=> HttpHandlers.getUserBalance identity eventStore
                         ]
                     ))
             ])

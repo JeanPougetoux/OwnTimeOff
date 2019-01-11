@@ -33,5 +33,6 @@ type UserVacationBalance = {
   CarriedOver: float
   PortionAccruedToDate: float
   TakenToDate: float
+  Planned: float
   CurrentBalance: float
 }
